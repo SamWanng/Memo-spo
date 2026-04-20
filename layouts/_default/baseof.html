@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{{- if .IsHome }}
+<html lang="zh-HK" data-home="true">
+{{- else }}
+<html lang="zh-HK" data-home="false">
+{{- end }}
+{{ partial "head.html" . }}
+<body>
+  {{ partial "header.html" . }}
+  {{ block "main" . }}{{ end }}
+  {{ partial "footer.html" . }}
+</body>
+</html>

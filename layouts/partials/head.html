@@ -1,0 +1,64 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.93">
+  <!-- Web fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chiron-go-round-tc-webfont@1.0.9/css/vf.min.css">
+
+{{- $title := .Title | default .Site.Title | plainify | htmlUnescape }}
+  <title>{{ $title }}</title>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ $title }}">
+  <meta property="og:title" content="{{ $title }}">
+
+{{- if .IsHome }}
+  {{- $description := .Site.Params.itunes_description | plainify | htmlUnescape | replaceRE "[\r\n]+" "" }}
+  <meta name="twitter:description" content="{{ $description }}">
+  <meta name="og:description" content="{{ $description }}">
+  <meta name="description" content="{{ $description }}">
+{{- else }}
+  {{- $summary := .Summary | replaceRE "[\r\n]+" "" | truncate 180 }}
+  <meta name="twitter:description" content="{{ $summary }}">
+  <meta name="og:description" content="{{ $summary }}">
+  <meta name="description" content="{{ $summary }}">
+{{- end }}
+
+{{- if ne .Kind "home" }}
+  <link rel="alternate" href="{{ "feed.xml" | absURL }}" type="application/rss+xml" title="{{ $.Site.Title }}">
+  <link rel="alternate" href="{{ "feed.json" | absURL }}" type="application/json" title="{{ $.Site.Title }}">
+{{- end }}
+
+{{- range .AlternativeOutputFormats }}
+  {{ printf `<link rel="%s" href="%s" type="%s" title="%s">` .Rel .Permalink .MediaType.Type $.Site.Title | safeHTML }}
+{{- end}}
+
+{{- if .Site.Params.has_podcasts }}
+  <link rel="alternate" href="{{ "podcast.xml" | absURL }}" type="application/rss+xml" title="Podcast">
+  <link rel="alternate" href="{{ "podcast.json" | absURL }}" type="application/json" title="Podcast">
+{{- end }}
+
+  <meta content="{{ .Site.Author.name }}" name="author">
+  <link rel="me" href="https://micro.blog/{{ .Site.Author.username }}">
+  <link rel="shortcut icon" href="https://micro.blog/{{ .Site.Author.username }}/favicon.png" type="image/x-icon">
+  <link rel="EditURI" type="application/rsd+xml" href="{{ "rsd.xml" | absURL }}">
+  <link rel="authorization_endpoint" href="https://micro.blog/indieauth/auth">
+  <link rel="token_endpoint" href="https://micro.blog/indieauth/token">
+  <link rel="subscribe" href="https://micro.blog/users/follow">
+  <link rel="webmention" href="https://micro.blog/webmention">
+  <link rel="micropub" href="https://micro.blog/micropub">
+  <link rel="microsub" href="https://micro.blog/microsub">
+
+  <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "custom.css" | relURL }}?{{ .Site.Params.theme_seconds }}">
+
+{{- range .Site.Params.plugins_css }}
+  <link rel="stylesheet" href="{{ . }}">
+{{- end }}
+
+{{- range $filename := .Site.Params.plugins_html }}
+  {{ partial $filename $ }}
+{{- end }}
+</head>

@@ -1,0 +1,25 @@
+<header>
+  <nav>
+    <h1><a href="/">{{ .Site.Title }}</a></h1>
+    <div class="links">
+      <a href="/feed.xml">
+        {{ with resources.Get "icons/cherrie.svg" }}
+          {{ .Content | safeHTML }}
+        {{ end }}
+        <div class="label">RSS</div>
+      </a>
+      <a href="/#ū-ê-bô-ê">
+        {{ with resources.Get "icons/noren.svg" }}
+          {{ .Content | safeHTML }}
+        {{ end }}
+        <div class="label">有的冇的</div>
+      </a>
+      <a href="mailto:toto@chunghwa.asia">
+        {{ with resources.Get "icons/luv lettre boi.svg" }}
+          {{ .Content | safeHTML }}
+        {{ end }}
+        <div class="label">來函</div>
+      </a>
+    </div>
+  </nav>
+</header>

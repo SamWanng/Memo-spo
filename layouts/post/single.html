@@ -1,0 +1,14 @@
+{{- define "main" }}
+{{- if .Title }}
+<div class="paper single" style="view-transition-name: {{ .File.BaseFileName }};">
+  <article class="post" tabindex="0" autofocus>
+    <h2><a href="{{ .Permalink }}">{{ .Title | safeHTML }}</a></h2>
+{{- else }}
+<div class="paper shortie single">
+  <article class="post">
+{{- end }}
+    {{ .Content }}
+  </article>
+  <a href="{{ .Permalink }}" class="material-symbols-outlined link">link</a>
+</div>
+{{- end }}

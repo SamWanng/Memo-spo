@@ -1,0 +1,100 @@
+/* Optional: site-level overrides. Image/halftone styles live in css/main.css */
+
+#ū-ê-bô-ê .listening-now {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--foreground-colour);
+  opacity: 0.92;
+}
+
+#ū-ê-bô-ê .listening-label {
+  opacity: 0.74;
+  white-space: nowrap;
+}
+
+#ū-ê-bô-ê .spotify-icon {
+  width: 1.02rem;
+  height: 1.02rem;
+  display: inline-flex;
+  color: #1db954;
+  flex: 0 0 auto;
+}
+
+#ū-ê-bô-ê .spotify-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#ū-ê-bô-ê .listening-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: #84d67b;
+  box-shadow: 0 0 0 0 rgba(132, 214, 123, 0.46);
+  flex: 0 0 auto;
+}
+
+#ū-ê-bô-ê .listening-text {
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: min(52vw, 24rem);
+}
+
+#ū-ê-bô-ê .listening-prefix {
+  opacity: 0.72;
+}
+
+#ū-ê-bô-ê .listening-text a {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+#ū-ê-bô-ê .listening-text a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+#ū-ê-bô-ê .listening-now[data-state="playing"] .listening-dot {
+  animation: listeningPulse 1.6s ease-out infinite;
+}
+
+#ū-ê-bô-ê .listening-now[data-state="idle"] .listening-dot {
+  background: color-mix(in srgb, var(--foreground-colour) 48%, #7a7a7a 52%);
+  box-shadow: none;
+}
+
+#ū-ê-bô-ê .listening-now[data-state="idle"] .spotify-icon {
+  color: color-mix(in srgb, #1db954 35%, var(--foreground-colour) 65%);
+}
+
+@keyframes listeningPulse {
+  0% { box-shadow: 0 0 0 0 rgba(132, 214, 123, 0.42); opacity: 1; }
+  70% { box-shadow: 0 0 0 10px rgba(132, 214, 123, 0); opacity: 0.78; }
+  100% { box-shadow: 0 0 0 0 rgba(132, 214, 123, 0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #ū-ê-bô-ê .listening-now[data-state="playing"] .listening-dot {
+    animation: none;
+  }
+}
+
+@media (max-width: 550px) {
+  #ū-ê-bô-ê .listening-now {
+    width: 100%;
+  }
+
+  #ū-ê-bô-ê .listening-text {
+    max-width: 100%;
+  }
+}

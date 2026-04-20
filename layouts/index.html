@@ -1,0 +1,35 @@
+{{ define "main" -}}
+<div class="posts">
+  {{- $paginator := .Paginate (where .Site.Pages.ByDate.Reverse "Type" "post") }}
+  {{- range .Paginator.Pages }}
+  {{- if .Title }}
+  <div class="paper" style="view-transition-name: {{ .File.BaseFileName }};">
+    <article class="post">
+      <h2><a href="{{ .Permalink }}">{{ .Title | safeHTML }}</a></h2>
+  {{- else }}
+  <div class="paper shortie">
+    <article class="post">
+  {{- end }}
+      {{ .Content }}
+    </article>
+    <a href="{{ .Permalink }}" class="material-symbols-outlined link">link</a>
+  </div>
+  {{ end }}
+</div>
+
+<div id="ū-ê-bô-ê">
+  <article>
+    {{ .Site.Params.about_me | safeHTML }}
+  </article>
+  <div class="listening-now" id="listening-now" data-state="idle" aria-live="polite">
+    <span class="listening-label">正在收听</span>
+    <span class="spotify-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 1.5C6.2 1.5 1.5 6.2 1.5 12S6.2 22.5 12 22.5 22.5 17.8 22.5 12 17.8 1.5 12 1.5Zm4.8 15.1a.78.78 0 0 1-1.07.25c-2.93-1.8-6.62-2.2-10.97-1.2a.78.78 0 1 1-.35-1.52c4.76-1.1 8.87-.63 12.13 1.36.36.22.47.7.26 1.11Zm1.53-3.4a.97.97 0 0 1-1.33.31c-3.35-2.06-8.45-2.66-12.41-1.46a.97.97 0 1 1-.57-1.86c4.53-1.38 10.16-.71 13.99 1.65.45.28.59.88.32 1.36Zm.13-3.54C14.4 7.27 7.76 7.04 3.9 8.2a1.16 1.16 0 0 1-.67-2.22c4.43-1.34 11.8-1.08 16.4 1.64a1.16 1.16 0 0 1-1.19 2.05Z"/>
+      </svg>
+    </span>
+    <span class="listening-dot" aria-hidden="true"></span>
+    <span class="listening-text">正在检查 Spotify...</span>
+  </div>
+</div>
+{{- end }}

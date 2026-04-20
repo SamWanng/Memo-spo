@@ -1,0 +1,4 @@
+{{- if .IsHome }}
+<script type="module" src="{{ "js/mb-newspaper-halftone.js" | relURL }}?{{ .Site.Params.theme_seconds }}"></script>
+<script defer src="{{ "js/now-playing.js" | relURL }}?{{ .Site.Params.theme_seconds }}"></script>
+{{- end }}
