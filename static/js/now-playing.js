@@ -1,14 +1,15 @@
 (function () {
-  var endpoint = "https://spotify-now-playing.samwanng.workers.dev/api/now-playing";
   var fastRefreshMs = 45000;
   var slowRefreshMs = 120000;
   var retryAfterErrorMs = 10000;
 
   var labelPlaying = "正在收听";
   var labelLastPlayed = "上次收听";
+  var labelUnavailable = "暂不可用";
 
   var root = document.getElementById("listening-now");
   if (!root) return;
+  var endpoint = root.dataset.endpoint || "https://spotify-now-playing.samwanng.workers.dev/api/now-playing";
 
   var labelEl = root.querySelector(".listening-label");
   var textEl = root.querySelector(".listening-text");
@@ -54,6 +55,12 @@
     textEl.textContent = "暂无可用记录";
   }
 
+  function renderUnavailableFallback() {
+    root.dataset.state = "error";
+    labelEl.textContent = labelUnavailable;
+    textEl.textContent = "Spotify 状态暂时无法读取";
+  }
+
   function scheduleNextRun(delayMs) {
     if (timerId) window.clearTimeout(timerId);
     timerId = window.setTimeout(refreshNowPlaying, delayMs);
@@ -87,7 +94,7 @@
       if (data && data.lastPlayed) {
         root.dataset.state = "idle";
         labelEl.textContent = labelLastPlayed;
-        renderTrack("Last played:", data.lastPlayed);
+        renderTrack("", data.lastPlayed);
         scheduleNextRun(fastRefreshMs);
         return;
       }
@@ -95,7 +102,12 @@
       renderIdleFallback();
       scheduleNextRun(slowRefreshMs);
     } catch (error) {
-      renderIdleFallback();
+      // CORS, network or timeout failures should show explicit status.
+      if (error && (error.name === "AbortError" || error.name === "TypeError")) {
+        renderUnavailableFallback();
+      } else {
+        renderIdleFallback();
+      }
       scheduleNextRun(retryAfterErrorMs);
     }
   }

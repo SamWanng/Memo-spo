@@ -99,6 +99,7 @@
     "paginate_categories": false,
     "paginate_replies": false,
     "theme_seconds": "0",
+    "spotify_now_playing_endpoint": "https://spotify-now-playing.samwanng.workers.dev/api/now-playing",
     "plugins_css": [],
     "plugins_js": [],
     "plugins_html": [],

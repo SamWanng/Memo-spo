@@ -1,37 +1,41 @@
 /* Optional: site-level overrides. Image/halftone styles live in css/main.css */
 
-#ū-ê-bô-ê .listening-now {
+#listening-now {
   margin-top: 0.5rem;
   display: inline-flex;
   align-items: center;
   gap: 0.42rem;
+  max-width: min(84vw, 34rem);
   font-size: 0.88rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
   color: var(--foreground-colour);
   opacity: 0.92;
 }
 
-#ū-ê-bô-ê .listening-label {
+#listening-now .listening-label {
   opacity: 0.74;
   white-space: nowrap;
+  flex: 0 0 auto;
 }
 
-#ū-ê-bô-ê .spotify-icon {
+#listening-now .spotify-icon {
   width: 1.02rem;
   height: 1.02rem;
+  min-width: 1.02rem;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: #1db954;
   flex: 0 0 auto;
 }
 
-#ū-ê-bô-ê .spotify-icon svg {
+#listening-now .spotify-icon svg {
   width: 100%;
   height: 100%;
   display: block;
 }
 
-#ū-ê-bô-ê .listening-dot {
+#listening-now .listening-dot {
   width: 0.42rem;
   height: 0.42rem;
   border-radius: 999px;
@@ -40,7 +44,7 @@
   flex: 0 0 auto;
 }
 
-#ū-ê-bô-ê .listening-text {
+#listening-now .listening-text {
   text-transform: none;
   letter-spacing: 0;
   white-space: nowrap;
@@ -49,31 +53,33 @@
   max-width: min(52vw, 24rem);
 }
 
-#ū-ê-bô-ê .listening-prefix {
+#listening-now .listening-prefix {
   opacity: 0.72;
 }
 
-#ū-ê-bô-ê .listening-text a {
+#listening-now .listening-text a {
   color: inherit;
   font-weight: inherit;
   text-decoration: none;
 }
 
-#ū-ê-bô-ê .listening-text a:hover {
+#listening-now .listening-text a:hover {
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
 
-#ū-ê-bô-ê .listening-now[data-state="playing"] .listening-dot {
+#listening-now[data-state="playing"] .listening-dot {
   animation: listeningPulse 1.6s ease-out infinite;
 }
 
-#ū-ê-bô-ê .listening-now[data-state="idle"] .listening-dot {
+#listening-now[data-state="idle"] .listening-dot,
+#listening-now[data-state="error"] .listening-dot {
   background: color-mix(in srgb, var(--foreground-colour) 48%, #7a7a7a 52%);
   box-shadow: none;
 }
 
-#ū-ê-bô-ê .listening-now[data-state="idle"] .spotify-icon {
+#listening-now[data-state="idle"] .spotify-icon,
+#listening-now[data-state="error"] .spotify-icon {
   color: color-mix(in srgb, #1db954 35%, var(--foreground-colour) 65%);
 }
 
@@ -84,17 +90,21 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #ū-ê-bô-ê .listening-now[data-state="playing"] .listening-dot {
+  #listening-now[data-state="playing"] .listening-dot {
     animation: none;
   }
 }
 
 @media (max-width: 550px) {
-  #ū-ê-bô-ê .listening-now {
+  #listening-now {
     width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto 1fr;
+    align-items: center;
   }
 
-  #ū-ê-bô-ê .listening-text {
+  #listening-now .listening-text {
     max-width: 100%;
+    min-width: 0;
   }
 }

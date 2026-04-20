@@ -21,7 +21,13 @@
   <article>
     {{ .Site.Params.about_me | safeHTML }}
   </article>
-  <div class="listening-now" id="listening-now" data-state="idle" aria-live="polite">
+  <div
+    class="listening-now"
+    id="listening-now"
+    data-state="idle"
+    data-endpoint="{{ .Site.Params.spotify_now_playing_endpoint | default "https://spotify-now-playing.samwanng.workers.dev/api/now-playing" }}"
+    aria-live="polite"
+  >
     <span class="listening-label">正在收听</span>
     <span class="spotify-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
