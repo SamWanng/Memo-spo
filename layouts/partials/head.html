@@ -51,8 +51,9 @@
   <link rel="micropub" href="https://micro.blog/micropub">
   <link rel="microsub" href="https://micro.blog/microsub">
 
-  <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
-  <link rel="stylesheet" href="{{ "custom.css" | relURL }}?{{ .Site.Params.theme_seconds }}">
+  {{- $assetVersion := now.Unix }}
+  <link rel="stylesheet" href="{{ "css/main.css" | relURL }}?v={{ $assetVersion }}">
+  <link rel="stylesheet" href="{{ "custom.css" | relURL }}?v={{ $assetVersion }}">
 
 {{- range .Site.Params.plugins_css }}
   <link rel="stylesheet" href="{{ . }}">

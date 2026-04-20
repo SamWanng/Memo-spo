@@ -1,4 +1,5 @@
 {{- if .IsHome }}
-<script type="module" src="{{ "js/mb-newspaper-halftone.js" | relURL }}?{{ .Site.Params.theme_seconds }}"></script>
-<script defer src="{{ "js/now-playing.js" | relURL }}?{{ .Site.Params.theme_seconds }}"></script>
+{{- $assetVersion := now.Unix }}
+<script type="module" src="{{ "js/mb-newspaper-halftone.js" | relURL }}?v={{ $assetVersion }}"></script>
+<script defer src="{{ "js/now-playing.js" | relURL }}?v={{ $assetVersion }}"></script>
 {{- end }}
